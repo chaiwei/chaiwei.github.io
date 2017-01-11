@@ -1,0 +1,65 @@
+ <pre>
+ drupal_add_js("
+    jQuery(document).ready(function(){
+
+        // checked parent checkbox (lvl-0) if lvl-1 checkbox being check
+        jQuery('.form-type-bef-checkbox.level-1 input').change(function(){
+            if(jQuery(this).prop('checked')){
+                var lvl0 = true;
+                var maxloop = 20;
+                var b = jQuery(this).parent();
+                while(lvl0 && maxloop > 0){
+                  maxloop--;
+                  b = b.prev();
+                  if(b.hasClass('level-0')){
+                    b.find('input').prop('checked', true);
+                    lvl0=false;
+                  }
+                }
+            }
+        });
+
+        // checked parent checkbox (lvl-0 & lvl-1) if lvl-2 checkbox being check
+        jQuery('.form-type-bef-checkbox.level-2 input').change(function(){
+            if(jQuery(this).prop('checked')){
+                var lvl0 = true;
+                var lvl1 = true;
+                var maxloop = 20;
+                var b = jQuery(this).parent();
+                while(lvl0 && maxloop > 0){
+                  maxloop--;
+                  b = b.prev();
+                  if(lvl1 && b.hasClass('level-1')){
+                    b.find('input').prop('checked', true);
+                    lvl1 = false;
+                  }
+                  if(b.hasClass('level-0')){
+                    b.find('input').prop('checked', true);
+                    lvl0=false;
+                  }
+                }
+            }
+        });
+
+        // unchecked children checkbox (lvl-1, lvl-2 and sub-child)
+        // if parent checkbox being uncheck
+        jQuery('.form-type-bef-checkbox.level-0 input').change(function(){
+            if(jQuery(this).prop('checked') == false){
+                var lvl1 = true;
+                var lvl2 = true;
+                var maxloop = 20;
+                var b = jQuery(this).parent();
+                while(lvl1 && maxloop > 0){
+                  maxloop--;
+                  b = b.next();
+                  if(b.hasClass('level-0')){
+                    lvl1 = false;
+                  }else{
+                    b.find('input').prop('checked', false);
+                  }
+                }
+            }
+        });
+    });
+", 'inline');
+</pre>
