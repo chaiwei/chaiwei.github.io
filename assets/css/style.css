@@ -1,7 +1,7 @@
 body { font-size: 20px; }
  
 .home { background: #06e089; color: #FFF; }
-.home .about-author { background: #05b16c; text-align: center; }
+.home .about-author { background: #05b16c; text-align: center; padding-top:15px; padding-bottom:15px; }
 
 .home .about-author .site-logo { 
     margin-top: 0;
